@@ -2,7 +2,7 @@ const Category = require('../models/category');
 
 module.exports = {
     all: (req, res) => {
-        User.find()
+        Category.find()
             .then(categories => res.json(categories))
             .catch(err => res.status(500).json(err))
     },

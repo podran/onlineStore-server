@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const config = require('../config/Enviorment');
+
 
 module.exports = {
     all: (req, res) => {
@@ -20,7 +22,7 @@ module.exports = {
         })
         .then (user => {
             if(user) {
-                const token = jwt.sign({id: user._id}, 'ABCD');
+                const token = jwt.sign({id: user._id}, config.secret);
                 res.json({token});
             } else {
                 res.status(403).json({});
@@ -29,9 +31,7 @@ module.exports = {
         .catch(err => res.status(500).json(err));
     },
     me: (req, res) => {
-        const user = jwt.verify(req.headers.authorization,'ABCD');
-        console.log(user);
-        User.findOne({_id: user.id})
+        User.findOne({_id: req.user.id})
         .then(user => res.json(user))
         .catch(err => res.send(err));
     }
