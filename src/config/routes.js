@@ -10,7 +10,8 @@ const apiRouter = express.Router();
 apiRouter.get('/user', users.all);
 apiRouter.put('/user', users.create);
 apiRouter.post('/user/login', users.login);
-apiRouter.get('/user/me',authorization, users.me)
+apiRouter.get('/user/me',authorization, users.me);
+apiRouter.post('/user/:id', users.update);
 
 
 apiRouter.get('/product', products.all);
