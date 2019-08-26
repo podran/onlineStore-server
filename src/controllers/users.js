@@ -32,7 +32,7 @@ module.exports = {
         .catch(err => res.status(500).json(err));
     },
     update: (req, res) => {
-        User.findOneAndUpdate({_id: new ObjectId(req.params.id)}, req.body, {new: true})
+        User.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
         .then(user => {
             console.log(user)
             res.status(200).json(user)
